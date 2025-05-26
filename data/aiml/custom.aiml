@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- 自定义规则，用于存储用户添加的规则 -->
+    <category>
+        <pattern>自定义规则</pattern>
+        <template>这是自定义规则文件，用于存储用户通过系统添加的新问答规则。您可以通过API向此文件添加新的规则。</template>
+    </category>
+    
+    <category>
+        <pattern>测试集成</pattern>
+        <template>恭喜！您已成功测试了AIML规则对话与会话管理的集成。当前时间是2025-05-26 21:59:03。</template>
+    </category>
+</aiml> 

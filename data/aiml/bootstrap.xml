@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- 引导文件，用于加载所有AIML规则文件 -->
+    <category>
+        <pattern>BOOTSTRAP</pattern>
+        <template>
+            <!-- 加载基础对话规则 -->
+            <learn>data/aiml/greeting.aiml</learn>
+            
+            <!-- 加载教育相关规则 -->
+            <learn>data/aiml/education.aiml</learn>
+            
+            <!-- 加载学科相关规则 -->
+            <learn>data/aiml/subjects.aiml</learn>
+            
+            <!-- 加载自定义规则 -->
+            <learn>data/aiml/custom.aiml</learn>
+            
+            初始化完成，智能教育助手已准备就绪。
+        </template>
+    </category>
+    
+    <!-- 默认回复 -->
+    <category>
+        <pattern>*</pattern>
+        <template>
+            <random>
+                <li>对不起，我不太理解您的问题。请尝试用更简单的方式提问。</li>
+                <li>这个问题有点复杂，能否换个方式提问？</li>
+                <li>我目前无法回答这个问题，您可以尝试问一些关于学习方法或具体学科的问题。</li>
+                <li>作为教育助手，我专注于回答学习和教育相关的问题。</li>
+            </random>
+        </template>
+    </category>
+    
+    <!-- 系统命令 -->
+    <category>
+        <pattern>RELOAD AIML</pattern>
+        <template>
+            <learn>data/aiml/greeting.aiml</learn>
+            <learn>data/aiml/education.aiml</learn>
+            <learn>data/aiml/subjects.aiml</learn>
+            <learn>data/aiml/custom.aiml</learn>
+            AIML规则已重新加载。
+        </template>
+    </category>
+</aiml> 

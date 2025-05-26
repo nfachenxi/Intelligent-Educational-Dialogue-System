@@ -1,11 +1,22 @@
 # -*- coding: utf-8 -*-
 import uuid
 from datetime import datetime
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..models import db, ChatSession, ChatHistory, User
+from ..services.aiml_service import AIMLService
 
 bp = Blueprint('chat', __name__)
+
+# 全局AIML服务实例
+aiml_service = None
+
+@bp.before_app_request
+def initialize_aiml_service():
+    """初始化AIML服务"""
+    global aiml_service
+    if aiml_service is None:
+        aiml_service = AIMLService()
 
 @bp.route('/sessions', methods=['GET'])
 @jwt_required()
@@ -90,6 +101,10 @@ def get_session(session_id):
 @jwt_required()
 def send_message(session_id):
     """发送消息"""
+    global aiml_service
+    if aiml_service is None:
+        aiml_service = AIMLService()
+        
     current_user_id = int(get_jwt_identity())
     data = request.get_json()
     
@@ -107,13 +122,20 @@ def send_message(session_id):
         return jsonify({'error': '会话不存在或已结束'}), 404
     
     try:
+        message_text = data['message']
+        message_type = data.get('message_type', 'text')
+        
+        # 获取AIML响应
+        response = aiml_service.get_response(message_text, session_id)
+        
         # 创建新消息
         message = ChatHistory(
             user_id=current_user_id,
             session_id=session_id,
-            message=data['message'],
-            response="",  # 这里先置空，后续由AI处理后更新
-            message_type=data.get('message_type', 'text')
+            message=message_text,
+            response=response,
+            message_type=message_type,
+            source='aiml'  # 标记来源为AIML
         )
         db.session.add(message)
         
@@ -122,13 +144,12 @@ def send_message(session_id):
         
         db.session.commit()
         
-        # TODO: 这里应该调用AI处理模块生成回复
-        # 暂时返回空回复
         return jsonify({
             'message': message.to_dict(),
             'session': session.to_dict()
         }), 201
     except Exception as e:
+        current_app.logger.error(f"消息发送失败: {str(e)}")
         db.session.rollback()
         return jsonify({'error': '消息发送失败'}), 500
 

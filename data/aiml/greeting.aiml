@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- 基本问候规则 -->
+    <category>
+        <pattern>你好</pattern>
+        <template>你好！我是智能教育助手，有什么可以帮助你的吗？</template>
+    </category>
+    
+    <category>
+        <pattern>* 你好 *</pattern>
+        <template>你好！我是智能教育助手，有什么可以帮助你的吗？</template>
+    </category>
+    
+    <category>
+        <pattern>你好 *</pattern>
+        <template>你好！很高兴认识你。我是智能教育助手，可以回答你关于学习的问题。</template>
+    </category>
+    
+    <category>
+        <pattern>* 你好</pattern>
+        <template>你好！很高兴认识你。有什么学习问题需要帮助吗？</template>
+    </category>
+    
+    <category>
+        <pattern>嗨</pattern>
+        <template>嗨！有什么我可以帮助你的吗？</template>
+    </category>
+    
+    <category>
+        <pattern>早上好</pattern>
+        <template>早上好！希望你今天有个美好的学习时光。</template>
+    </category>
+    
+    <category>
+        <pattern>下午好</pattern>
+        <template>下午好！下午是学习的好时光，有什么我可以帮助你的吗？</template>
+    </category>
+    
+    <category>
+        <pattern>晚上好</pattern>
+        <template>晚上好！晚上也是复习和巩固知识的好时机。</template>
+    </category>
+    
+    <category>
+        <pattern>你是谁</pattern>
+        <template>我是智能教育助手，一个基于自然语言处理技术的智能对话系统。我可以回答你关于学习和教育的问题，帮助你解决学习中的困惑。</template>
+    </category>
+    
+    <category>
+        <pattern>你的名字是什么</pattern>
+        <template>我的名字是"智能教育助手"，你可以简称我为"教育助手"。</template>
+    </category>
+    
+    <category>
+        <pattern>你能做什么</pattern>
+        <template>
+            <random>
+                <li>我可以回答教育和学习相关的问题，解释概念，提供学习方法建议，以及进行知识问答。</li>
+                <li>作为教育助手，我能回答各学科问题，提供学习技巧，解释概念，并帮助你理解难点。</li>
+                <li>我的主要功能是回答学习问题，提供学习建议，解释各学科概念，以及提供相关知识。</li>
+            </random>
+        </template>
+    </category>
+    
+    <category>
+        <pattern>再见</pattern>
+        <template>
+            <random>
+                <li>再见！祝你学习进步！</li>
+                <li>下次再见！如果有问题随时来问我。</li>
+                <li>再见！希望我的回答对你有所帮助。</li>
+                <li>再见！祝你学习顺利！</li>
+            </random>
+        </template>
+    </category>
+    
+    <category>
+        <pattern>谢谢</pattern>
+        <template>
+            <random>
+                <li>不客气，很高兴能帮到你。</li>
+                <li>随时为您服务，这是我的职责。</li>
+                <li>不用谢，如有其他问题随时问我。</li>
+                <li>能帮助你我很开心，还有其他问题吗？</li>
+            </random>
+        </template>
+    </category>
+    
+    <category>
+        <pattern>* 谢谢 *</pattern>
+        <template>不客气，很高兴能帮到你。如果还有其他问题，随时可以问我。</template>
+    </category>
+    
+    <category>
+        <pattern>* 谢谢</pattern>
+        <template>不用谢，能帮助你我很高兴。</template>
+    </category>
+    
+    <category>
+        <pattern>谢谢 *</pattern>
+        <template>不客气，希望我的回答对你有帮助。</template>
+    </category>
+    
+    <category>
+        <pattern>帮助</pattern>
+        <template>我是智能教育助手，可以回答你关于学习和各学科的问题。你可以直接问我具体学科的问题，如"什么是光合作用"，或者问一些学习方法，如"如何提高学习效率"。</template>
+    </category>
+</aiml> 

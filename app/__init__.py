@@ -18,9 +18,10 @@ def create_app():
     jwt = JWTManager(app)
     
     # 注册蓝图
-    from app.routes import main, auth, chat
+    from app.routes import main, auth, chat, aiml
     app.register_blueprint(main.bp)
     app.register_blueprint(auth.bp, url_prefix='/auth')
     app.register_blueprint(chat.bp, url_prefix='/chat')
+    app.register_blueprint(aiml.bp, url_prefix='/aiml')
 
     return app 
