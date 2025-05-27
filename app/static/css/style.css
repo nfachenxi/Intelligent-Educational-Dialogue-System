@@ -1,0 +1,103 @@
+/* 全局样式 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* 导航栏 */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 页脚 */
+.footer {
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+/* 卡片样式 */
+.card {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 按钮样式 */
+.btn {
+    border-radius: 4px;
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: #4a6bdf;
+    border-color: #4a6bdf;
+}
+
+.btn-primary:hover {
+    background-color: #3a56b5;
+    border-color: #3a56b5;
+}
+
+/* 表单样式 */
+.form-control {
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(74, 107, 223, 0.25);
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+/* 页面标题 */
+.page-title {
+    margin-bottom: 2rem;
+    color: #343a40;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* 自定义颜色 */
+.bg-light-blue {
+    background-color: #e9f0f8;
+}
+
+.text-primary-custom {
+    color: #4a6bdf;
+}
+
+/* 对话页面特定样式 */
+.chat-page .message-container {
+    height: 70vh;
+    overflow-y: auto;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+} 

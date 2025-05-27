@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}首页 | 智能教育对话系统{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 text-center mb-5">
+        <h1 class="display-4">欢迎使用智能教育对话系统</h1>
+        <p class="lead">基于多种技术的智能对话系统，专注于教育场景的自然语言交互</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-comments fa-3x text-primary mb-3"></i>
+                <h3 class="card-title">AIML规则对话</h3>
+                <p class="card-text">基于人工智能标记语言的规则检索式对话系统，提供快速准确的教育问答服务。</p>
+                <a href="/aiml" class="btn btn-outline-primary">开始对话</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-robot fa-3x text-primary mb-3"></i>
+                <h3 class="card-title">GPT-2生成对话</h3>
+                <p class="card-text">基于深度学习的生成式对话模型，支持更灵活自然的教育场景交互。</p>
+                <a href="/gpt2-chat" class="btn btn-primary">开始对话</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-project-diagram fa-3x text-primary mb-3"></i>
+                <h3 class="card-title">知识图谱</h3>
+                <p class="card-text">教育领域知识图谱支持的智能问答，提供更精准的概念解析和关联知识。</p>
+                <a href="#" class="btn btn-outline-primary">即将推出</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-12">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h4 class="card-title">系统特点</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-light">多种对话技术融合</li>
+                            <li class="list-group-item bg-light">教育场景针对性优化</li>
+                            <li class="list-group-item bg-light">支持多轮上下文对话</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-light">情感分析增强交互体验</li>
+                            <li class="list-group-item bg-light">知识图谱提供精准答案</li>
+                            <li class="list-group-item bg-light">持续学习与自我优化</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+{% endblock %} 

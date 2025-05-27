@@ -7,38 +7,34 @@ Flask-Migrate==4.0.5
 Flask-JWT-Extended==4.6.0
 
 # 数据库
-SQLAlchemy==2.0.25
+SQLAlchemy==2.0.28
 alembic==1.13.1
-SQLite3Database==0.2.1
 
-# 工具
-python-dotenv==1.0.1
-werkzeug==3.0.1
-click==8.1.7
-itsdangerous==2.1.2
-importlib-metadata==7.0.1
-six==1.16.0
-PyJWT==2.8.0
-
-# 自然语言处理
+# AIML
 python-aiml==0.9.3
-nltk==3.8.1
-spacy==3.7.2
 
 # 机器学习
-transformers==4.41.1
+transformers==4.38.2
 torch==2.2.1
-scikit-learn==1.4.0
-numpy==1.26.3
+scikit-learn==1.4.1.post1
+numpy==1.26.4
 pandas==2.2.0
+datasets==2.16.0
 
-# 知识图谱
+# NLP工具
+nltk==3.8.1
+spacy==3.7.2
 rdflib==7.0.0
 
-# 测试相关
+# 工具库
+python-dotenv==1.0.1
+requests==2.31.0
+tqdm==4.66.2
+
+# 测试
 pytest==8.1.1
 pytest-cov==4.1.0
 
-# 开发工具
+# 代码质量
 black==24.2.0
 flake8==7.0.0 

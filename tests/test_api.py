@@ -2,34 +2,53 @@
 import requests
 import json
 import os
+import pytest
+from conftest import BASE_URL
 
-BASE_URL = 'http://127.0.0.1:5000'
-
-def test_login(username='test_user', password='test123'):
-    """测试登录并返回访问令牌"""
+def test_login():
+    """测试用户登录"""
     url = f'{BASE_URL}/auth/login'
     data = {
-        'username': username,
-        'password': password
+        'username': 'test_user',
+        'password': 'test123'
     }
     response = requests.post(url, json=data)
-    print('登录状态码:', response.status_code)
-    
-    try:
-        result = response.json()
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-        
-        # 保存token到文件中以便后续使用
-        if 'access_token' in result:
-            token_file = os.path.join(os.path.dirname(__file__), 'token.txt')
-            with open(token_file, 'w') as f:
-                f.write(result['access_token'])
-            print(f'Token已保存到: {token_file}')
-            
-        return result.get('access_token')
-    except Exception as e:
-        print('解析响应出错:', e)
-        return None
+    assert response.status_code == 200
+    json_data = response.json()
+    assert 'access_token' in json_data
+    assert 'refresh_token' in json_data
+
+def test_register():
+    """测试用户注册"""
+    url = f'{BASE_URL}/auth/register'
+    data = {
+        'username': 'test_user',
+        'password': 'test123',
+        'email': 'test@example.com'
+    }
+    response = requests.post(url, json=data)
+    assert response.status_code == 400
+    assert response.json()['error'] == '用户名已存在'
+
+def test_user_info(access_token):
+    """测试获取用户信息"""
+    url = f'{BASE_URL}/auth/user'
+    headers = {'Authorization': f'Bearer {access_token}'}
+    response = requests.get(url, headers=headers)
+    assert response.status_code == 200
+    user_info = response.json()
+    assert 'username' in user_info
+    assert 'email' in user_info
+    assert 'role' in user_info
+    assert user_info['username'] == 'test_user'
+
+def test_refresh_token(refresh_token):
+    """测试刷新访问令牌"""
+    url = f'{BASE_URL}/auth/refresh'
+    headers = {'Authorization': f'Bearer {refresh_token}'}
+    response = requests.post(url, headers=headers)
+    assert response.status_code == 200
+    assert 'access_token' in response.json()
 
 def get_token():
     """获取访问令牌，如果本地文件存在则使用文件中的token，否则重新登录获取"""
@@ -50,41 +69,6 @@ def get_token():
     
     # 如果token不存在或已失效，重新登录获取
     return test_login()
-
-def test_register(username='test_user', email='test@example.com', password='test123'):
-    """测试用户注册"""
-    url = f'{BASE_URL}/auth/register'
-    data = {
-        'username': username,
-        'email': email,
-        'password': password,
-        'role': 'student'
-    }
-    response = requests.post(url, json=data)
-    print('注册状态码:', response.status_code)
-    print(json.dumps(response.json(), ensure_ascii=False, indent=2))
-    
-    return response.json()
-
-def test_user_info(access_token):
-    """测试获取用户信息"""
-    url = f'{BASE_URL}/auth/user'
-    headers = {'Authorization': f'Bearer {access_token}'}
-    response = requests.get(url, headers=headers)
-    print('用户信息状态码:', response.status_code)
-    print(json.dumps(response.json(), ensure_ascii=False, indent=2))
-    
-    return response.json()
-
-def test_refresh_token(refresh_token):
-    """测试刷新token"""
-    url = f'{BASE_URL}/auth/refresh'
-    headers = {'Authorization': f'Bearer {refresh_token}'}
-    response = requests.post(url, headers=headers)
-    print('刷新Token状态码:', response.status_code)
-    print(json.dumps(response.json(), ensure_ascii=False, indent=2))
-    
-    return response.json()
 
 if __name__ == '__main__':
     # 测试注册

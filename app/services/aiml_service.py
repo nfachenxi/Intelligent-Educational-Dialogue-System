@@ -8,6 +8,9 @@ from flask import current_app
 
 logger = logging.getLogger(__name__)
 
+# 基础目录路径，不依赖current_app
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'data', 'aiml'))
+
 class AIMLService:
     """AIML规则对话服务"""
     
@@ -22,9 +25,21 @@ class AIMLService:
         
         # 设置默认目录
         if aiml_dir is None:
-            self.aiml_dir = os.path.join(current_app.root_path, '..', 'data', 'aiml')
+            try:
+                # 尝试使用Flask应用上下文
+                if current_app:
+                    self.aiml_dir = os.path.join(current_app.root_path, '..', 'data', 'aiml')
+                else:
+                    self.aiml_dir = BASE_DIR
+            except Exception:
+                # 当应用上下文不可用时使用BASE_DIR
+                self.aiml_dir = BASE_DIR
         else:
             self.aiml_dir = aiml_dir
+            
+        # 确保目录存在
+        if not os.path.exists(self.aiml_dir):
+            os.makedirs(self.aiml_dir, exist_ok=True)
             
         # 初始化AIML核心
         self._load_aiml_files()

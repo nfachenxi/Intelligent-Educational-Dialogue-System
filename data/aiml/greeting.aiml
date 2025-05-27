@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aiml version="1.0">
-    <!-- 基本问候规则 -->
+    <!-- 基本问候 -->
     <category>
         <pattern>你好</pattern>
-        <template>你好！我是智能教育助手，有什么可以帮助你的吗？</template>
+        <template>
+            <random>
+                <li>你好！我是你的智能学习助手，很高兴能帮助你。</li>
+                <li>你好啊！有什么我可以帮你的吗？</li>
+                <li>你好！让我们开始今天的学习之旅吧！</li>
+                <li>你好！需要了解哪个学科的内容呢？</li>
+            </random>
+        </template>
     </category>
     
     <category>
@@ -28,22 +35,46 @@
     
     <category>
         <pattern>早上好</pattern>
-        <template>早上好！希望你今天有个美好的学习时光。</template>
+        <template>
+            <random>
+                <li>早上好！新的一天开始了，让我们充满活力地学习吧！</li>
+                <li>早安！早晨是学习效率最高的时候，准备好开始了吗？</li>
+                <li>早上好！今天有什么学习计划呢？</li>
+            </random>
+        </template>
     </category>
     
     <category>
         <pattern>下午好</pattern>
-        <template>下午好！下午是学习的好时光，有什么我可以帮助你的吗？</template>
+        <template>
+            <random>
+                <li>下午好！休息得好吗？让我们继续学习吧！</li>
+                <li>下午好！下午是复习的好时机，需要我帮你梳理知识点吗？</li>
+                <li>下午好！有什么问题需要解答吗？</li>
+            </random>
+        </template>
     </category>
     
     <category>
         <pattern>晚上好</pattern>
-        <template>晚上好！晚上也是复习和巩固知识的好时机。</template>
+        <template>
+            <random>
+                <li>晚上好！准备复习今天的内容吗？</li>
+                <li>晚上好！晚上是个总结和规划的好时机。</li>
+                <li>晚上好！需要我帮你制定明天的学习计划吗？</li>
+            </random>
+        </template>
     </category>
     
     <category>
         <pattern>你是谁</pattern>
-        <template>我是智能教育助手，一个基于自然语言处理技术的智能对话系统。我可以回答你关于学习和教育的问题，帮助你解决学习中的困惑。</template>
+        <template>
+            <random>
+                <li>我是一个智能教育助手，专门帮助学生提高学习效率和解答学习问题。我可以提供学习方法指导、知识点讲解和学科答疑等服务。</li>
+                <li>你好，我是你的AI学习伙伴。我可以帮你解答各个学科的问题，提供学习建议，一起探索知识的海洋。</li>
+                <li>我是一个教育AI助手，致力于帮助你更好地学习。无论是学习方法、知识点还是考试技巧，我都很乐意为你解答。</li>
+            </random>
+        </template>
     </category>
     
     <category>
@@ -54,11 +85,14 @@
     <category>
         <pattern>你能做什么</pattern>
         <template>
-            <random>
-                <li>我可以回答教育和学习相关的问题，解释概念，提供学习方法建议，以及进行知识问答。</li>
-                <li>作为教育助手，我能回答各学科问题，提供学习技巧，解释概念，并帮助你理解难点。</li>
-                <li>我的主要功能是回答学习问题，提供学习建议，解释各学科概念，以及提供相关知识。</li>
-            </random>
+            我可以为你提供以下帮助：
+            1. 各学科的学习方法指导
+            2. 重要知识点讲解
+            3. 学习计划制定建议
+            4. 考试技巧分享
+            5. 答疑解惑
+            6. 学习资源推荐
+            你想了解哪个方面呢？
         </template>
     </category>
     
@@ -67,9 +101,9 @@
         <template>
             <random>
                 <li>再见！祝你学习进步！</li>
-                <li>下次再见！如果有问题随时来问我。</li>
-                <li>再见！希望我的回答对你有所帮助。</li>
-                <li>再见！祝你学习顺利！</li>
+                <li>下次见！记得及时复习今天学到的内容哦！</li>
+                <li>再见！有问题随时都可以来问我！</li>
+                <li>再见！期待我们的下次交流！</li>
             </random>
         </template>
     </category>
@@ -78,10 +112,10 @@
         <pattern>谢谢</pattern>
         <template>
             <random>
-                <li>不客气，很高兴能帮到你。</li>
-                <li>随时为您服务，这是我的职责。</li>
-                <li>不用谢，如有其他问题随时问我。</li>
-                <li>能帮助你我很开心，还有其他问题吗？</li>
+                <li>不用谢！很高兴能帮到你。</li>
+                <li>这是我应该做的，祝你学习顺利！</li>
+                <li>不客气，如果还有问题随时问我哦！</li>
+                <li>应该的！学习路上我们一起加油！</li>
             </random>
         </template>
     </category>
@@ -104,5 +138,51 @@
     <category>
         <pattern>帮助</pattern>
         <template>我是智能教育助手，可以回答你关于学习和各学科的问题。你可以直接问我具体学科的问题，如"什么是光合作用"，或者问一些学习方法，如"如何提高学习效率"。</template>
+    </category>
+
+    <!-- 鼓励语句 -->
+    <category>
+        <pattern>我学不会</pattern>
+        <template>
+            <random>
+                <li>别灰心！每个人的学习节奏都不一样，慢慢来，我们一起找到适合你的方法。</li>
+                <li>没关系，让我们换个角度来理解这个问题。你觉得困难的地方在哪里？</li>
+                <li>相信自己！只要方法对，没有学不会的知识。让我们一步一步来。</li>
+                <li>学习本来就是一个渐进的过程，我们一起努力，一定能掌握的！</li>
+            </random>
+        </template>
+    </category>
+
+    <!-- 学习建议 -->
+    <category>
+        <pattern>我想提高成绩</pattern>
+        <template>
+            <random>
+                <li>很好的目标！让我们先分析一下你目前的学习情况，找出需要改进的地方。</li>
+                <li>提高成绩需要合理的计划和持续的努力。我们可以先制定一个学习计划，你觉得怎么样？</li>
+                <li>提高成绩的关键是找到适合自己的学习方法。让我们一起探讨一下你的学习习惯吧！</li>
+            </random>
+        </template>
+    </category>
+
+    <!-- 学习动力 -->
+    <category>
+        <pattern>我没有学习动力</pattern>
+        <template>
+            <random>
+                <li>这是很多学生都会遇到的问题。让我们先设定一个小目标，一步一步来重建学习动力。</li>
+                <li>也许是因为没有找到适合的学习方法。我们可以一起探索更适合你的学习方式。</li>
+                <li>不如我们先聊聊你的兴趣爱好，把学习和兴趣结合起来可能会有意想不到的效果。</li>
+                <li>学习动力不足时，可以尝试改变学习环境或者找个学习伙伴。要不要听听其他建议？</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>怎么学习编程</pattern>
+        <template>学习编程需要掌握基础语法，多做练习，参与实际项目。建议从Python等简单语言开始学习。</template>
+    </category>
+    <category>
+        <pattern>怎么学习编程</pattern>
+        <template>学习编程需要掌握基础语法，多做练习，参与实际项目。建议从Python等简单语言开始学习。</template>
     </category>
 </aiml> 

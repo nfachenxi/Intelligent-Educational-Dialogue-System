@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <category>
+        <pattern>测试问题</pattern>
+        <template>这是测试回答</template>
+    </category>
+    <category>
+        <pattern>测试 *</pattern>
+        <template>我不知道关于<star/>的信息</template>
+    </category>
+</aiml>

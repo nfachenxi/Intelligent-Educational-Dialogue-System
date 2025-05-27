@@ -10,4 +10,20 @@
         <pattern>测试集成</pattern>
         <template>恭喜！您已成功测试了AIML规则对话与会话管理的集成。当前时间是2025-05-26 21:59:03。</template>
     </category>
+<category>
+    <pattern>怎么学习编程</pattern>
+    <template>学习编程需要掌握基础语法，多做练习，参与实际项目。建议从Python等简单语言开始学习。</template>
+</category>
+<category>
+    <pattern>推荐一些学习资源</pattern>
+    <template>推荐以下学习资源：1. 在线教程网站如Coursera, edX等；2. 编程社区如GitHub, Stack Overflow；3. 官方文档；4. 技术博客和书籍。</template>
+</category>
+<category>
+    <pattern>怎么学习编程</pattern>
+    <template>学习编程需要掌握基础语法，多做练习，参与实际项目。建议从Python等简单语言开始学习。</template>
+</category>
+<category>
+    <pattern>推荐一些学习资源</pattern>
+    <template>推荐以下学习资源：1. 在线教程网站如Coursera, edX等；2. 编程社区如GitHub, Stack Overflow；3. 官方文档；4. 技术博客和书籍。</template>
+</category>
 </aiml> 

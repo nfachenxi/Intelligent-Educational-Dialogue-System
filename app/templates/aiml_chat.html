@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+
+{% block title %}AIML规则对话 | 智能教育对话系统{% endblock %}
+
+{% block extra_css %}
+<style>
+    .chat-container {
+        height: 70vh;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        background-color: #f9f9f9;
+    }
+    .message {
+        margin-bottom: 15px;
+        padding: 10px 15px;
+        border-radius: 10px;
+        max-width: 80%;
+    }
+    .user-message {
+        background-color: #dcf8c6;
+        margin-left: auto;
+        text-align: right;
+        border-bottom-right-radius: 0;
+    }
+    .assistant-message {
+        background-color: #ffffff;
+        margin-right: auto;
+        border-bottom-left-radius: 0;
+    }
+    .message-input {
+        border-radius: 20px;
+        padding-right: 50px;
+    }
+    .send-button {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        border: none;
+        background: transparent;
+        color: #007bff;
+    }
+    .typing-indicator {
+        display: none;
+        text-align: left;
+        padding: 5px 10px;
+        background-color: #f0f0f0;
+        border-radius: 10px;
+        width: fit-content;
+        margin-bottom: 10px;
+    }
+    .typing-dot {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background-color: #666;
+        margin-right: 3px;
+        animation: typing 1.5s infinite ease-in-out;
+    }
+    .typing-dot:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    .typing-dot:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+    @keyframes typing {
+        0%, 60%, 100% { transform: translateY(0); }
+        30% { transform: translateY(-5px); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 offset-lg-2">
+        <h2 class="mb-4 text-center">AIML规则对话</h2>
+        
+        <div class="alert alert-info mb-3">
+            <strong>当前知识库:</strong> <span id="knowledge-base">教育领域AIML知识库</span>
+        </div>
+        
+        <div class="chat-container" id="chat-container">
+            <div class="assistant-message message">
+                您好！我是基于AIML规则的智能教育助手，请问有什么我可以帮助您的？
+            </div>
+            <div class="typing-indicator" id="typing-indicator">
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+            </div>
+        </div>
+        
+        <div class="mt-3 position-relative">
+            <input type="text" class="form-control message-input" id="message-input" placeholder="输入您的问题...">
+            <button class="send-button" id="send-button">
+                <i class="fas fa-paper-plane"></i>发送
+            </button>
+        </div>
+        
+        <div class="mt-4 text-center">
+            <button class="btn btn-outline-danger btn-sm me-2" id="clear-chat">清空对话</button>
+            <button class="btn btn-outline-secondary btn-sm" id="copy-chat">复制对话</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const chatContainer = document.getElementById('chat-container');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const clearChatButton = document.getElementById('clear-chat');
+        const copyChatButton = document.getElementById('copy-chat');
+        const typingIndicator = document.getElementById('typing-indicator');
+        
+        let currentSessionId = null;
+        
+        // 发送消息
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+            
+            // 添加用户消息到聊天窗口
+            addMessage(message, 'user');
+            messageInput.value = '';
+            
+            // 显示打字动画
+            typingIndicator.style.display = 'block';
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            // 发送请求到服务器
+            fetch('/aiml/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: message,
+                    session_id: currentSessionId
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 隐藏打字动画
+                typingIndicator.style.display = 'none';
+                
+                // 添加助手回复到聊天窗口
+                addMessage(data.response, 'assistant');
+                
+                // 保存会话ID
+                if (data.session_id) {
+                    currentSessionId = data.session_id;
+                }
+            })
+            .catch(error => {
+                console.error('发送消息失败:', error);
+                typingIndicator.style.display = 'none';
+                addMessage('很抱歉，发生了错误，请稍后再试。', 'assistant');
+            });
+        }
+        
+        // 添加消息到聊天窗口
+        function addMessage(content, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(sender + '-message');
+            messageDiv.textContent = content;
+            
+            // 将打字指示器移到最后
+            chatContainer.insertBefore(messageDiv, typingIndicator);
+            
+            // 滚动到底部
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        // 清空聊天
+        clearChatButton.addEventListener('click', function() {
+            if (confirm('确定要清空当前对话吗？')) {
+                chatContainer.innerHTML = '';
+                chatContainer.appendChild(typingIndicator);
+                addMessage('您好！我是基于AIML规则的智能教育助手，请问有什么我可以帮助您的？', 'assistant');
+                currentSessionId = null;
+            }
+        });
+        
+        // 复制对话
+        copyChatButton.addEventListener('click', function() {
+            const messages = chatContainer.querySelectorAll('.message');
+            let chatText = '';
+            
+            messages.forEach(message => {
+                if (message.classList.contains('user-message')) {
+                    chatText += '用户: ' + message.textContent + '\n';
+                } else if (message.classList.contains('assistant-message')) {
+                    chatText += '助手: ' + message.textContent + '\n';
+                }
+            });
+            
+            navigator.clipboard.writeText(chatText)
+                .then(() => alert('对话已复制到剪贴板'))
+                .catch(err => console.error('复制失败:', err));
+        });
+        
+        // 点击发送按钮发送消息
+        sendButton.addEventListener('click', sendMessage);
+        
+        // 按回车键发送消息
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    });
+</script>
+{% endblock %} 
